@@ -19,6 +19,7 @@ import { DirectedGraph, LayoutManager } from '@jaegertracing/plexus';
 
 import drawNode from './drawNode';
 import ErrorMessage from '../../common/ErrorMessage';
+import GraphSearch from '../../common/GraphSearch';
 import LoadingIndicator from '../../common/LoadingIndicator';
 import { fetchedState } from '../../../constants';
 import convPlexus from '../../../model/trace-dag/convPlexus';
@@ -112,6 +113,7 @@ export default class TraceDiffGraph extends React.PureComponent<Props> {
           edges={edges}
           vertices={vertices}
         />
+        <GraphSearch />
       </div>
     );
   }
