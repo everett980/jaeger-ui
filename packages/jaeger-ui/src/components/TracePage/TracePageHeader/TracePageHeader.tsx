@@ -35,6 +35,8 @@ import { TNil } from '../../../types';
 import { Trace } from '../../../types/trace';
 import { formatDatetime, formatDuration } from '../../../utils/date';
 
+import GraphCompressionPanel from './GraphCompressionPanel';
+
 import './TracePageHeader.css';
 
 type TracePageHeaderEmbedProps = {
@@ -206,6 +208,7 @@ export function TracePageHeaderFn(props: TracePageHeaderEmbedProps & { forwarded
             updateViewRangeTime={updateViewRangeTime}
           />
         )}
+      <GraphCompressionPanel />
     </header>
   );
 }
