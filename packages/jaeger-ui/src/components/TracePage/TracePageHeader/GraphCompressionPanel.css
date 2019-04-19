@@ -1,0 +1,59 @@
+.panel-container {
+  display: flex;
+  flex-direction: row;
+  padding: 0 2em;
+  /*
+  alignItems: center;
+  justifyContent: space-between;
+  */
+  position: fixed;
+  bottom: 0px;
+  background-color: red;
+  height: 20px;
+}
+
+.panel-container:not(:hover) {
+  background-color: pink;
+}
+
+.panel-container > div:not(:last-child) {
+  margin-right: 15px;
+}
+
+.expand-o-matic {
+  height: 300px;
+  position: fixed;
+  bottom: 20px;
+  transition: bottom 2s;
+}
+
+.GraphDetail {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-check-bok {
+  margin: 0px 4px;
+}
+
+.can-hide:not(:hover) > .expand-o-matic {
+  /* height: 0px; */
+  bottom: -300px;
+}
+
+.expander-container {
+  /* overflow: hidden; */
+}
+
+.ddg-example {
+  height: 100px;
+}
+
+.img-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.descriptor {
+  text-align: center;
+}
