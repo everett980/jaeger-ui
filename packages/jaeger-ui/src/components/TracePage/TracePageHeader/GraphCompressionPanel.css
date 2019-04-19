@@ -46,7 +46,7 @@
 }
 
 .ddg-example {
-  height: 100px;
+  height: 15vh;
 }
 
 .img-row {
@@ -56,4 +56,27 @@
 
 .descriptor {
   text-align: center;
+}
+
+@keyframes topFadeInOut {
+  0% {
+    opacity:1;
+  }
+  45% {
+    opacity:1;
+  }
+  55% {
+    opacity:0;
+  }
+  100% {
+    opacity:0;
+  }
+}
+
+img.top {
+  animation-name: cf3FadeInOut;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 2s;
+  animation-direction: alternate;
 }
