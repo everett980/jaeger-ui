@@ -58,6 +58,11 @@
   text-align: center;
 }
 
+.ant-modal-content {
+  width: 40vw;
+}
+
+/*
 @keyframes topFadeInOut {
   0% {
     opacity:1;
@@ -80,3 +85,4 @@ img.top {
   animation-duration: 2s;
   animation-direction: alternate;
 }
+*/

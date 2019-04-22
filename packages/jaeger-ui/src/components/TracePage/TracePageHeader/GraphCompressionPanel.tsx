@@ -27,11 +27,23 @@ import './GraphCompressionPanel.css';
 
 type detailLevel = 'off' | 'UvD' | 'PPE' | 'EvI';
 
-const detailLevelSvgMap: Record<detailLevel, string> = {
-  off: ConciseDdg,
-  UvD: UvdDdg,
-  PPE: PpeDdg,
-  EvI: EviDdg,
+const detailLevelSvgMap: Record<detailLevel, { svg: string, title: string }> = {
+  off: {
+    svg: ConciseDdg,
+    title: 'Most Concise',
+  },
+  UvD: {
+    svg: UvdDdg,
+    title: 'Upstream v Downstream',
+  },
+  PPE: {
+    svg: PpeDdg,
+    title: 'Prevent Path Entanglement',
+  },
+  EvI: {
+    svg: EviDdg,
+    title: 'External v Internal',
+  },
 };
 
 export default class GraphCompressionPanel extends React.PureComponent<
@@ -102,30 +114,30 @@ export default class GraphCompressionPanel extends React.PureComponent<
           <div className='expand-o-matic GraphDetail'>
             <span>
               Graph Detail <Button className="ant-btn-icon-only" htmlType="button" onClick={this.openModal} ><IoIosInformationCircle /></Button>:
-                <Modal align="center" closable title="Graph Detail Options" onCancel={this.closeModal} visible={this.state.detailModalOpen}>
+                <Modal align="center" bodyStyle={{ width: '40vw' }} closable title="Graph Detail Options" onCancel={this.closeModal} visible={this.state.detailModalOpen}>
                   <div>
                     <h3 className="descriptor">Most Concise</h3>
                     <div className="img-row">
-                      <img className="ddg-example" src={detailLevelSvgMap['off']}/>
+                      <img className="ddg-example" src={detailLevelSvgMap['off'].svg}/>
                       <p>Densest view of a Deep Dependency Graph, every service or service and operation will appear once.</p>
                     </div>
-                    <h3 className="descriptor">+Upstream v Downstream</h3>
+                    <h3 className="descriptor">+{detailLevelSvgMap['UvD'].title}</h3>
                     <div className="img-row">
-                      <img className="ddg-example" src={detailLevelSvgMap['UvD']}/>
+                      <img className="ddg-example" src={detailLevelSvgMap['UvD'].svg}/>
                       <p>More detailed view that distinguishes between upstream and downstream of the focal node. Previously it was ambiguous if the green node was only downstream of focal node, now it is clear.</p>
                     </div>
-                    <h3 className="descriptor">+Prevent Path Entanglement</h3>
+                    <h3 className="descriptor">+{detailLevelSvgMap['PPE'].title}</h3>
                     <div className="img-row">
-                      <img className="ddg-example" src={detailLevelSvgMap['PPE']}/>
+                      <img className="ddg-example" src={detailLevelSvgMap['PPE'].svg}/>
                         <div>
                           <p>By preventing the convergence of the downstream blue node into a single node, it is clear that the downstream blue node is only dependent on the yellow node when it is after the red node.</p>
                           <p>Additionally, this ensures both sides of the focal nodes are trees and that there are no cycles in the Deep Dependency Graph.
                           </p>
                         </div>
                     </div>
-                    <h3 className="descriptor">+External v Internal</h3>
+                    <h3 className="descriptor">+{detailLevelSvgMap['EvI'].title}</h3>
                     <div className="img-row">
-                      <img className="ddg-example" src={detailLevelSvgMap['EvI']}/>
+                      <img className="ddg-example" src={detailLevelSvgMap['EvI'].svg}/>
                       <div>
                         <p>Differentiating between External vertices (sources or leaves) and Internal vertices can help identify entry and exit points.</p>
                         <p>This can be used to ensure incoming requests are conditioned by a gateway service or that all interactions with a downstream service are persisted in a database.</p>
@@ -156,7 +168,7 @@ export default class GraphCompressionPanel extends React.PureComponent<
             </label>
             <Popover
               content={(
-                <div><img className="ddg-example" src={detailLevelSvgMap[this.state.detailLevel]} /><img className="ddg-example top" src={detailLevelSvgMap[this.getTargetLevel('EvI')]} /></div>
+                <div><img className="ddg-example" src={detailLevelSvgMap[this.state.detailLevel].svg} /><img className="ddg-example top" src={detailLevelSvgMap[this.getTargetLevel('EvI')].svg} /></div>
                 )}
             >
               <label>
