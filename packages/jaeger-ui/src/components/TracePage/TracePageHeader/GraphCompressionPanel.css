@@ -6,8 +6,8 @@
   alignItems: center;
   justifyContent: space-between;
   */
-  position: fixed;
-  bottom: 0px;
+  position: absolute;
+  bottom: -20px;
   background-color: red;
   height: 20px;
 }
@@ -21,10 +21,12 @@
 }
 
 .expand-o-matic {
-  height: 300px;
-  position: fixed;
-  bottom: 20px;
-  transition: bottom 2s;
+  /* height: auto; */
+  transform: scaleY(1);
+  position: absolute;
+  top: 0px;
+  overflow: hidden;
+  transition: transform 2s;
 }
 
 .GraphDetail {
@@ -37,8 +39,9 @@
 }
 
 .can-hide:not(:hover) > .expand-o-matic {
+  transform: scaleY(0);
   /* height: 0px; */
-  bottom: -300px;
+  /* bottom: -300px; */
 }
 
 .expander-container {

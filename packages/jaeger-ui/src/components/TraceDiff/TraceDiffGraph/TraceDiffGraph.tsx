@@ -26,8 +26,6 @@ import { fetchedState } from '../../../constants';
 import { setOnEdgesContainer, setOnNodesContainer, setOnNode } from '../../../utils/plexus/set-on-graph';
 import { FetchedTrace, TNil } from '../../../types';
 
-import GraphCompressionPanel from '../../TracePage/TracePageHeader/GraphCompressionPanel';
-
 import './TraceDiffGraph.css';
 
 type Props = {
@@ -117,7 +115,6 @@ export class UnconnectedTraceDiffGraph extends React.PureComponent<Props> {
           vertices={vertices}
         />
         <UiFindInput inputProps={inputProps} />
-        <GraphCompressionPanel/>
       </div>
     );
   }

@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import * as React from 'react';
-import { Button, Checkbox, Modal, Popover, Switch, Tooltip } from 'antd';
+import { Button, Checkbox, Icon, Modal, Popover, Switch, Timeline, Tooltip } from 'antd';
 import cx from 'classnames';
 
 import IoIosInformationCircle from 'react-icons/lib/io/informatcircled';
@@ -173,49 +173,50 @@ export default class GraphCompressionPanel extends React.PureComponent<
   render() {
     const { detailLevel, operation } = this.state;
     return (
-      <div className='panel-container' >
-        <div>I exist solely to pad out the next div</div>
-        <div>Layout</div>
-        <div className={cx('expander-container', { 'can-hide': !this.state.detailModalOpen })}>
-          <div className='expand-o-matic GraphDetail'>
-            <div>
-            <label>
-              <Checkbox
-                className="detail-check-bok"
-                onChange={this.toggleSvSO}
-                checked={operation}
-              />
-              Separate Operations Within a Service <Tooltip placement="right" title="If enabled, different operations for the same service will get their own nodes" ><IoIosInformationCircle /></Tooltip>
-              </label>
-            </div>
-            <span>
-              Graph Detail <Button className={"ant-btn-icon-only" /* no hacky classNames! */ } htmlType="button" onClick={this.openModal} ><IoIosInformationCircle /></Button>:
-              <Modal align="center" bodyStyle={{ width: '40vw' }} closable title="Graph Detail Options" onCancel={this.closeModal} visible={this.state.detailModalOpen}>
-                {(Object.keys(detailLevelMap) as TDetailLevel[]).map(modalRow)}
-              </Modal>
-            </span>
-            {(Object.keys(detailLevelMap) as TDetailLevel[]).map((key: TDetailLevel, index) => Boolean(index) && (
-            <Popover
-              content={popoverContent(detailLevel, this.getTargetLevel(key))}
-              mouseEnterDelay={0.5}
-              key={key}
-              placement={"rightBottom" /* change to "rightTop" if panel-container is at top */}
-            >
-            <label>
-              <Checkbox
-                className="detail-check-bok"
-                onChange={() =>
-                  this.setState({ detailLevel: this.getTargetLevel(key) })
-                }
-                checked={!getPredecessors(key).includes(detailLevel)}
-              />
-              {detailLevelMap[key].title}
+      <div className={cx('panel-container', { 'can-hide': true })} >
+        <div className='expand-o-matic GraphDetail'>
+          <div>
+          <label>
+            <Checkbox
+              className="detail-check-bok"
+              onChange={this.toggleSvSO}
+              checked={operation}
+            />
+            Separate Operations Within a Service <Tooltip placement="right" title="If enabled, different operations for the same service will get their own nodes" ><IoIosInformationCircle /></Tooltip>
             </label>
-            </Popover>
-            ))}
           </div>
+          <span>
+            Graph Detail <Button className={"ant-btn-icon-only" /* no hacky classNames! */ } htmlType="button" onClick={this.openModal} ><IoIosInformationCircle /></Button>:
+            <Modal align="center" bodyStyle={{ width: '40vw' }} closable title="Graph Detail Options" onCancel={this.closeModal} visible={this.state.detailModalOpen}>
+              {allKeys.map(modalRow)}
+            </Modal>
+          </span>
+          <Timeline>
+          {(Object.keys(detailLevelMap) as TDetailLevel[]).map((key: TDetailLevel, index) => Boolean(index) && (
+          <Popover
+            content={popoverContent(detailLevel, this.getTargetLevel(key))}
+            mouseEnterDelay={0.5}
+            key={key}
+            placement={"rightBottom" /* change to "rightTop" if panel-container is at top */}
+          >
+            <div 
+            onClick={() =>
+              this.setState({ detailLevel: this.getTargetLevel(key) })
+            }
+              >
+          <Timeline.Item
+            dot={<Icon
+              className="detail-check-bok"
+              type={getPredecessors(key).includes(detailLevel) ? 'up-square' : 'check-square'}
+            />
+            }>
+            {detailLevelMap[key].title}
+            </Timeline.Item>
+            </div>
+          </Popover>
+          ))}
+        </Timeline>
         </div>
-        <div>Hop Stuff</div>
       </div>
     );
   }

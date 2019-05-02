@@ -58,3 +58,8 @@ limitations under the License.
   display: inline-block;
   margin-right: 1rem;
 }
+
+/* Only exists for PanelDemo, remove: */
+.TraecDiffHeader--labelItem {
+  position: relative;
+}

@@ -23,6 +23,8 @@ import { FetchedTrace, TNil } from '../../../types';
 
 import './TraceDiffHeader.css';
 
+import GraphCompressionPanel from '../../TracePage/TracePageHeader/GraphCompressionPanel';
+
 type Props = {
   a: FetchedTrace | TNil;
   b: FetchedTrace | TNil;
@@ -121,6 +123,7 @@ export default class TraceDiffHeader extends React.PureComponent<Props, State> {
         </Popover>
         <div className="TraecDiffHeader--labelItem">
           <h2 className="u-tx-muted ub-mx3 ub-my0">VS</h2>
+          <GraphCompressionPanel/>
         </div>
         <div className="TraecDiffHeader--labelItem-darkened">
           <h1 className="ub-m0">B</h1>
